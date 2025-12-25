@@ -99,7 +99,9 @@ if (!existingUser) {
         mobile: existingUser.mobile,
         role: existingUser.role,
         isVerified: existingUser.isVerified,
-        id: existingUser._id,}
+        id: existingUser._id,
+        profileImage:existingUser.profileImage,
+      }
     }); 
   }catch(err){
     next(err);

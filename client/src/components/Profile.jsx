@@ -29,7 +29,15 @@ export default function Profile({ onClose }) {
       {/* User Info */}
       <div className="flex items-center gap-3 pb-3 border-b">
         <div className="w-11 h-11 rounded-full bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg">
-          {user.name?.[0]?.toUpperCase() || "U"}
+          {user.profileImage ? (
+                <img
+                  src={user.profileImage}
+                  alt="Profile"
+                  className="w-full h-full object-cover rounded-full bg-linear-to-br"
+                />
+              ) : (
+                user.firstName?.[0]?.toUpperCase() || "U"
+              )}
         </div>
         <div>
           <p className="font-semibold text-gray-800">{user.name}</p>

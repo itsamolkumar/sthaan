@@ -16,6 +16,7 @@ export default function Navbar() {
 
   return (
     <div className="mx-auto my-1 bg-white/80 backdrop-blur-lg rounded-3xl px-4 py-2 flex items-center justify-between shadow-lg w-full relative">
+      
       {/* Logo */}
       <NavLink to="/" className="flex items-center gap-3 font-extrabold text-lg">
         <div className="w-9 h-9 rounded-2xl bg-linear-to-br from-blue-600 to-purple-600 grid place-items-center text-white shadow">
@@ -24,45 +25,75 @@ export default function Navbar() {
         Sthaan
       </NavLink>
 
-      {/* Nav Links */}
+      {/* Center Links */}
       <div className="hidden md:flex items-center gap-3">
-        <NavLink to="/" className="text-md font-medium hover:text-blue-600 cursor-pointer">
+        <NavLink to="/" className="text-md font-medium hover:text-blue-600">
           Explore
         </NavLink>
-        <NavLink to="/" className="text-md font-medium hover:text-blue-600 cursor-pointer">
+
+        <NavLink to="/become-host" className="text-md font-medium hover:text-blue-600">
           Host
         </NavLink>
+
+        {/* ✅ ADMIN LINK */}
+        {user?.role === "admin" && (
+          <NavLink
+            to="/admin/dashboard"
+            className="text-md font-semibold text-red-600 hover:underline"
+          >
+            Admin
+          </NavLink>
+        )}
       </div>
 
       {/* Right Side */}
       <div className="flex items-center gap-2 relative">
-        {/* Dark mode toggle */}
-        <button id="darkToggle" aria-label="Toggle dark mode" className="text-xl px-2">
+        {/* Dark mode */}
+        <button aria-label="Toggle dark mode" className="text-xl px-2">
           <i className="fa-solid fa-moon"></i>
         </button>
-         {!user && (
+
+        {/* Not logged in */}
+        {!user && (
           <>
-            <button onClick={() => navigate("/auth/login")} className="text-sm font-medium">
+            <button
+              onClick={() => navigate("/auth/login")}
+              className="text-sm font-medium"
+            >
               Log in
             </button>
+
             <button
-              onClick={() => navigate("auth/signup")}
+              onClick={() => navigate("/auth/signup")}
               className="text-sm font-semibold px-3 py-2 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 text-white"
             >
               Sign up
             </button>
           </>
-         )}
-         {user && (
+        )}
+
+        {/* Logged in */}
+        {user && (
           <div className="relative">
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center font-semibold shadow"
+              className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center font-semibold shadow overflow-hidden"
             >
-              {user.firstName?.[0]?.toUpperCase() || "U"}
+              {/* ✅ PROFILE IMAGE FIX */}
+              {user.profileImage ? (
+                <img
+                  src={user.profileImage}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                user.firstName?.[0]?.toUpperCase() || "U"
+              )}
             </button>
 
-            {isProfileOpen && <Profile onClose={() => setIsProfileOpen(false)} />}
+            {isProfileOpen && (
+              <Profile onClose={() => setIsProfileOpen(false)} />
+            )}
           </div>
         )}
       </div>

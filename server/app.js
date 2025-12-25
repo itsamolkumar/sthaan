@@ -5,9 +5,13 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/errorHandler.js";
 import authRouter from "./routes/authRoutes.js";
+import userRouter from "./routes/userRoutes.js";
 import { v4 as uuidv4 } from 'uuid';
 import connectDB from "./config/mongodb.js";
 import { NotFoundError } from "./errors/AppError.js";
+import adminRouter from "./admin/adminRouter.js";
+import User from "./models/User.js";
+
 
 const app = express();
 connectDB();
@@ -15,7 +19,6 @@ const allowedOrigins = [
     "http://localhost:8080",
     "http://localhost:5173", // <-- add https://
 ];
-app.use(express.json());
 app.use(cookieParser());
 app.use(cors({origin:allowedOrigins,credentials:true}));
 
@@ -27,7 +30,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/users', userRouter);
+app.use(express.json());
+app.use('/api/admin',adminRouter);
+
 app.use('/api/auth', authRouter);
+
+
 
 app.get("/",(req,res)=>{
     res.send("I'm Here");

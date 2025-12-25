@@ -70,6 +70,10 @@ wishlist: [{
     type: Boolean, 
     default: false 
   },
+  isBlocked: {
+  type: Boolean,
+  default: false
+},
   kycDocs: [{
     docType: { type: String },     // "Aadhar", "PAN"
     docUrl: { type: String },      // "https://s3.aws.com/pan.jpg"

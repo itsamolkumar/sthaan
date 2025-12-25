@@ -20,6 +20,10 @@ const HouseSchema = new mongoose.Schema({
     checkIn: { type: Date },                     // 2025-08-27
     checkOut: { type: Date }                     // 2025-08-30
   }],
+  isActive: {
+    type: Boolean,
+    default: true   // ✅ listing active by default
+  },
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   createdAt: { type: Date, default: Date.now }
 });

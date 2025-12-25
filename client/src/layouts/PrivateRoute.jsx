@@ -1,10 +1,21 @@
-import { Navigate } from "react-router-dom";
-import { isLoggedIn } from "../fakeAuth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { checkAuth } from "../app/features/authSlice";
 
 const PrivateRoute = ({ children }) => {
-//   if (!isLoggedIn()) {
-//     return <Navigate to="/login" />;
-//   }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    // dispatch(checkAuth());
+     console.log("user---",user);
+  if (!user) {
+     navigate("/auth/login");
+  }
+  }, [dispatch]);
+   
 
   return children;
 };
