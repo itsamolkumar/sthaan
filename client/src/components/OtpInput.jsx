@@ -31,7 +31,7 @@ const OtpInput = ({ register, setValue, error }) => {
             key={index}
             type="text"
             maxLength="1"
-            className="w-12 h-12 text-center border rounded text-lg"
+            className="w-12 h-12 text-center border-2 border-gray-300 rounded-xl text-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition bg-white shadow-sm"
             {...register(`otp.${index}`, {
               required: true,
             })}

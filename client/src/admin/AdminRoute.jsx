@@ -3,19 +3,16 @@ import { useSelector } from "react-redux";
 
 export default function AdminRoute({ children }) {
   const location = useLocation();
+  const { user, isAuthChecked } = useSelector(
+    (state) => state.auth
+  );
 
-  //  DIRECT localStorage check (MOST IMPORTANT)
-  const authData = localStorage.getItem("auth");
-  const parsedAuth = authData ? JSON.parse(authData) : null;
-  const storedUser = parsedAuth?.user;
+  // ⏳ Jab tak backend auth decide na ho
+  if (!isAuthChecked) {
+    return null; // ya loader
+  }
 
-  // Redux (secondary)
-  const reduxUser = useSelector((state) => state.auth.user);
-
-  // Prefer redux if available, else fallback to storage
-  const user = reduxUser || storedUser;
-
-  //  Not logged in
+  // ❌ Not logged in
   if (!user) {
     return (
       <Navigate
@@ -26,7 +23,7 @@ export default function AdminRoute({ children }) {
     );
   }
 
-  //  Logged in but not admin
+  // ❌ Logged in but not admin
   if (user.role !== "admin") {
     return <Navigate to="/" replace />;
   }

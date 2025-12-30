@@ -16,15 +16,15 @@ export const dashboardController=async(req,res,next)=>{
         return next (new BadRequestError("You'r not an admin") );
     }
     const totalBookings = await Booking.countDocuments({});
-    console.log("totalBookings",totalBookings);
+    // console.log("totalBookings",totalBookings);
     const totalUsers = await User.countDocuments({});
-    console.log("totalUsers",totalUsers);
+    // console.log("totalUsers",totalUsers);
     const totalHouses = await House.countDocuments({});
-    console.log("totalHouses",totalHouses);
+    // console.log("totalHouses",totalHouses);
     const totalProviders= await User.countDocuments({role:"provider",isHostVerified:true});
-    console.log("totalProviders",totalProviders);
+    // console.log("totalProviders",totalProviders);
     const totalpendingProviders = await User.countDocuments({role:"provider",isHostVerified:false});
-    console.log("totalpendingProviders",totalpendingProviders);
+    // console.log("totalpendingProviders",totalpendingProviders);
      return res.status(201).json({
       success: true,
       message: "Data send successfully to the admin dashboard",
@@ -55,7 +55,7 @@ export const providerRequests=async(req,res,next)=>{
         return next (new BadRequestError("You'r not an admin") );
     }
     const totalData=await User.find({role:"provider",isHostVerified:false});
-    console.log("total data--",totalData);
+    // console.log("total data--",totalData);
      return res.status(201).json({
       success: true,
       message: "Data send successfully to the admin dashboard",
@@ -117,7 +117,7 @@ export const users=async(req,res,next)=>{
         return next (new BadRequestError("You'r not an admin") );
     }
     const totalData=await User.find({role:"user"});
-    console.log("total data--",totalData);
+    // console.log("total data--",totalData);
      return res.status(201).json({
       success: true,
       message: "User List send successfully to the admin dashboard",

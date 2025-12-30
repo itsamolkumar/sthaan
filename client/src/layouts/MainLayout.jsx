@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import GlobalLoader from "../components/GlobalLoader";
 const MainLayout=()=>{
     return (
         <>
@@ -9,7 +10,9 @@ const MainLayout=()=>{
         </nav>
         <main>
             {/* saare child pages yaha par render honge */}
-            <Outlet/> 
+            <GlobalLoader>
+                <Outlet/>
+            </GlobalLoader>
         </main>
         <footer>
             <Footer/>

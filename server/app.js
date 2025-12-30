@@ -10,8 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import connectDB from "./config/mongodb.js";
 import { NotFoundError } from "./errors/AppError.js";
 import adminRouter from "./admin/adminRouter.js";
-import User from "./models/User.js";
-
+import hostPostRouter from "./routes/hostPostRouter.js";
+import postRouter from "./routes/postRouter.js";
 
 const app = express();
 connectDB();
@@ -31,11 +31,12 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/host',hostPostRouter);
+app.use("/api/post",postRouter);
 app.use(express.json());
+
 app.use('/api/admin',adminRouter);
-
 app.use('/api/auth', authRouter);
-
 
 
 app.get("/",(req,res)=>{

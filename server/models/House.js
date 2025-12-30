@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
 const HouseSchema = new mongoose.Schema({
   name: { type: String, required: true },        // "Luxury Villa in Goa"
-  images: [{ type: String }],                    // ["villa1.jpg", "villa2.jpg"]
+  images: {
+  bedroom: [{ type: String }],
+  bathroom: [{ type: String }],
+  kitchen: [{ type: String }],
+  exterior: [{ type: String }],
+  other: [{ type: String }],
+},                 // ["villa1.jpg", "villa2.jpg"]
   description: { type: String },                 // "Beautiful 3BHK villa near beach"
   category: { type: String },                    // "Villa" / "Apartment"
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, 

@@ -10,10 +10,10 @@ import { AlreadyExistsError, BadRequestError, MissingDetailsError } from "../err
 // register
 const register = async (req, res, next) => {
   try {
-    // ✅ Joi middleware se already validated data
+    //  Joi middleware se already validated data
     const { firstName,lastName, email, mobile, password } = req.body;
 
-    console.log("🚗🚗 Checking existing user...");
+    console.log(" Checking existing user...");
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -25,7 +25,7 @@ const register = async (req, res, next) => {
       );
     }
 
-    console.log("🚗🚗 Hashing password...");
+    console.log(" Hashing password...");
     const hashedPass = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
@@ -49,7 +49,7 @@ const register = async (req, res, next) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-     console.log("✅ Email being sent to:", newUser.email);
+     console.log(" Email being sent to:", newUser.email);
          await transporter.sendMail({
             from: process.env.SENDER_EMAIL,
             to: email,
@@ -154,7 +154,23 @@ const generateOtp=async(req,res,next)=>{
     next(err);
   }
 }
+const fetchUser=async(req,res,next)=>{
+  try{
+    console.log("host",req.params.id);
+  const {id}=req.params;
+  if(!id) next(new BadRequestError("Invalid credentials"));
 
+  const user=await User.findById(id);
+  if(!user) next(new BadRequestError("Host doesn't exist"));
+  if(user.role!=="provider") next (new BadRequestError("User in not a provider"));
+  return res.status(201).json({
+    success:true,
+    message:"data send succesfuly",
+    user,
+  });
+}catch(err){
+  next(err);
+}}
 const verifyEmail=async(req,res,next)=>{
   const {otp}=req.body;
   console.log("req.body",req.body);
@@ -256,4 +272,4 @@ res.json({success:true, message:"Otp has been send on user's mail..."})
 
 
 
-export { register, login,logout, generateOtp, verifyEmail, isAuthenticated, sendResetOtp,resetPassword  };
+export { register, login,logout, fetchUser, generateOtp, verifyEmail, isAuthenticated, sendResetOtp,resetPassword  };

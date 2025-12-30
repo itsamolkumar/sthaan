@@ -11,6 +11,9 @@ export default function AdminSidebar() {
       </h1>
 
       <nav className="flex flex-col gap-2 p-4">
+         <NavLink to="/" className={linkClass}>
+          Home
+        </NavLink>
         <NavLink to="/admin/dashboard" className={linkClass}>
           Dashboard
         </NavLink>

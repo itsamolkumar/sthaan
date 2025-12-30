@@ -14,7 +14,7 @@ const AuthForm = ({ children, onSubmit, btnName }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-md mx-auto space-y-6"
+      className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-xl space-y-6 border border-gray-100"
     >
       {/*
         children = function
@@ -30,7 +30,7 @@ const AuthForm = ({ children, onSubmit, btnName }) => {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded"
+        className="w-full bg-blue-600 text-white py-2 rounded font-semibold shadow hover:opacity-90 transition"
       >
         {btnName}
       </button>

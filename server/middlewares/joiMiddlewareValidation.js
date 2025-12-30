@@ -1,4 +1,4 @@
-import { MissingDetailsError, BadRequestError } from "../errors/AppError.js";
+import {  BadRequestError } from "../errors/AppError.js";
 const validate = (schema) => {
   return (req, res, next) => {
     const { error, value } = schema.validate(req.body, {

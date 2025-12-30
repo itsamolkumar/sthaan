@@ -13,7 +13,13 @@ export default function Navbar() {
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
-
+  console.log("user",user?.role);
+  const destination=(user?.role==="provider")?"/host/dashboard":"/become-host";
+  const goToExplore = () => {
+  navigate("/", {
+    state: { scrollTo: "popular" },
+  });
+};
   return (
     <div className="mx-auto my-1 bg-white/80 backdrop-blur-lg rounded-3xl px-4 py-2 flex items-center justify-between shadow-lg w-full relative">
       
@@ -27,11 +33,15 @@ export default function Navbar() {
 
       {/* Center Links */}
       <div className="hidden md:flex items-center gap-3">
-        <NavLink to="/" className="text-md font-medium hover:text-blue-600">
+        <button
+          onClick={goToExplore}
+          className="text-md font-medium hover:text-blue-600"
+        >
           Explore
-        </NavLink>
+        </button>
 
-        <NavLink to="/become-host" className="text-md font-medium hover:text-blue-600">
+
+        <NavLink to={destination} className="text-md font-medium hover:text-blue-600">
           Host
         </NavLink>
 

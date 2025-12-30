@@ -20,8 +20,8 @@ export const becomeHost = async (req, res, next) => {
 
     //  Find user
     const user = await User.findById(userId);
-    console.log("UserID in Host COntroller---",userId);
-        console.log("User in Host COntroller---",user);
+    // console.log("UserID in Host COntroller---",userId);
+        // console.log("User in Host COntroller---",user);
 
     
     if (!user) {

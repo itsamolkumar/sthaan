@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import AdminSidebar from "./components/AdminSidebar";
+import GlobalLoader from "../components/GlobalLoader";
 
 export default function AdminLayout() {
   return (
@@ -7,7 +8,9 @@ export default function AdminLayout() {
       <AdminSidebar />
 
       <main className="flex-1 p-6">
-        <Outlet />
+        <GlobalLoader>
+          <Outlet />
+        </GlobalLoader>
       </main>
     </div>
   );

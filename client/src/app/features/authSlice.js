@@ -123,11 +123,13 @@ export const resetPassword = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
-    loading: false,
-    error: null,
-    resetEmail: null,
-  },
+  user: null,
+  loading: false,
+  error: null,
+  resetEmail: null,
+  isAuthChecked: false, 
+},
+
   reducers: {
     clearError: (state) => {
       state.error = null;
@@ -167,12 +169,21 @@ const authSlice = createSlice({
       })
 
       // Check Auth
+      .addCase(checkAuth.pending, (state) => {
+        state.isAuthChecked = false;
+        state.loading = true;
+      })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload.user || null;
+        state.loading = false;
+        state.isAuthChecked = true;
       })
       .addCase(checkAuth.rejected, (state) => {
         state.user = null;
+        state.loading = false;
+        state.isAuthChecked = true;
       })
+
 
       // Logout
       .addCase(logoutUser.fulfilled, (state,action) => {

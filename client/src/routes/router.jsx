@@ -25,6 +25,18 @@ import Users from "../admin/pages/Users";
 import Listings from "../admin/pages/Listings";
 import Bookings from "../admin/pages/Bookings";
 
+//Provider
+import HostRoute from "../provider/HostRoute";
+import HostLayout from "../provider/HostLayout";
+import HostDashboard from "../provider/pages/HostDashboard";
+import HostListings from "../provider/pages/HostListings"
+import CreateListing from "../provider/pages/CreateListing";
+import EditListing from "../provider/pages/EditListing";
+import HostBookings from "../provider/pages/HostBookings";
+
+//Post
+import ListingDetails from "../pages/ListingDetails";
+
 const router = createBrowserRouter([
   //  USER / PUBLIC ROUTES
   {
@@ -44,6 +56,7 @@ const router = createBrowserRouter([
       { path: "auth/verify-user", element: <VerifyUser /> },
       { path: "auth/forgot-password", element: <ResetOtpRequest /> },
       { path: "auth/forgot-password-otp", element: <ResetPassword /> },
+      { path: "post/listings/:id", element: <ListingDetails /> },
 
       // host
       {
@@ -73,6 +86,22 @@ const router = createBrowserRouter([
       { path: "bookings", element: <Bookings /> },
     ],
   },
+  {
+  path: "/host",
+  element: (
+    <HostRoute>
+      <HostLayout />
+    </HostRoute>
+  ),
+  children: [
+    { path: "dashboard", element: <HostDashboard /> },
+    { path: "listings", element: <HostListings /> },
+    { path: "listings/create", element: <CreateListing /> },
+    { path: "listings/:id/edit", element: <EditListing /> },
+    { path: "bookings", element: <HostBookings /> },
+  ],
+}
+
 ]);
 
 export default router;
