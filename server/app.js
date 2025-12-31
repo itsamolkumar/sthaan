@@ -19,7 +19,10 @@ const app = express();
 connectDB();
 const allowedOrigins = [
     "http://localhost:8080",
-    "http://localhost:5173", // <-- add https://
+    "http://localhost:5173",
+    "https://sthaan.vercel.app/",
+    "https://sthaan-git-main-amol-kumars-projects.vercel.app/",
+    "https://sthaan-r1se4nlmx-amol-kumars-projects.vercel.app/", // <-- add https://
 ];
 app.use(cookieParser());
 app.use(cors({origin:allowedOrigins,credentials:true}));
