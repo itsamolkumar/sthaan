@@ -37,9 +37,12 @@ import HostBookings from "../provider/pages/HostBookings";
 //Payments
 import PaymentSuccess from "../pages/PaymentSuccess";
 import PaymentFailed from "../pages/PaymentFailed";
+import MyBookings from "../pages/MyBookings";
+import BookingDetails from "../pages/BookingDetails";
 
 //Post
 import ListingDetails from "../pages/ListingDetails";
+
 
 const router = createBrowserRouter([
   //  USER / PUBLIC ROUTES
@@ -63,7 +66,8 @@ const router = createBrowserRouter([
       { path: "post/listings/:id", element: <ListingDetails /> },
       { path: "/payment/success", element: <PaymentSuccess />},
       { path: "/payment/failed", element: <PaymentFailed />},
-
+      {path:"/user/my-bookings", element: <MyBookings/>},
+      {path:"/bookings/:id", element:<BookingDetails/>},
 
       // host
       {

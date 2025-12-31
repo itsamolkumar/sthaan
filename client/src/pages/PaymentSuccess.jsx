@@ -29,7 +29,7 @@ export default function PaymentSuccess() {
 
         <div className="flex flex-col gap-3">
           <button
-            onClick={() => navigate("/my-bookings")}
+            onClick={() => navigate("/user/my-bookings")}
             className="w-full bg-pink-600 text-white py-3 rounded-xl font-semibold hover:bg-pink-700 transition"
           >
             View My Bookings

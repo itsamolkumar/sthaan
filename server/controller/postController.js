@@ -1,4 +1,5 @@
 import House from "../models/House.js";
+import { BadRequestError, NotFoundError } from "../errors/AppError.js";
 
 export const getSingleHouse = async (req, res, next) => {
   try {
@@ -43,3 +44,4 @@ export const getListings = async (req, res, next) => {
     next(err);
   }
 };
+

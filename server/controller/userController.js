@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 import { BadRequestError } from "../errors/AppError.js";
-
+import Booking from "../models/Booking.js";
 export const becomeHost = async (req, res, next) => {
   try {
     //  Logged-in user id (JWT middleware se aata hai)
@@ -75,3 +75,22 @@ export const becomeHost = async (req, res, next) => {
     next(error);
   }
 };
+
+export const myBookings=async(req,res,next)=>{
+  try {
+    const userId = req.authUserId;
+
+    if (!userId) {
+      return next(new BadRequestError("User not authenticated"));
+    }
+
+    const bookings = await Booking.find({ user: userId })
+      .populate("house", "name location images pricePerNight")
+      .sort({ createdAt: -1 }); // latest booking first
+
+    return res.status(200).json(bookings);
+  }catch(err){
+    next(err);
+  }
+
+}

@@ -13,6 +13,7 @@ import adminRouter from "./admin/adminRouter.js";
 import hostPostRouter from "./routes/hostPostRouter.js";
 import postRouter from "./routes/postRouter.js";
 import paymentRouter from "./routes/paymentRoutes.js";
+import bookRouter from "./routes/bookingRouter.js";
 
 const app = express();
 connectDB();
@@ -39,6 +40,7 @@ app.use(express.json());
 app.use('/api/admin',adminRouter);
 app.use('/api/auth', authRouter);
 app.use("/api/payment", paymentRouter);
+app.use("/api/bookings",bookRouter);
 
 app.get("/",(req,res)=>{
     res.send("I'm Here");

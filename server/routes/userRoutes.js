@@ -4,7 +4,7 @@ import upload from "../middlewares/upload.js";
 import asyncWrap from "../utils/asyncWrap.js";
 // import validate from "../middlewares/joiMiddlewareValidation.js";
 // import { userValidationSchema } from "../joiValidation/userSchemaValidation.js";
-import { becomeHost } from "../controller/userController.js";
+import { becomeHost, myBookings } from "../controller/userController.js";
 const userRouter=express.Router();
 userRouter.post(
   "/become-host",
@@ -18,4 +18,5 @@ userRouter.post(
   // validate(userValidationSchema),
   asyncWrap(becomeHost)
 );
+userRouter.get("/bookings",authMiddleware,asyncWrap(myBookings));
 export default userRouter;
