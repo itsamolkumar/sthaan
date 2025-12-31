@@ -1,17 +1,73 @@
-export default function BookingCard({ listing }) {
+export default function BookingCard({
+  pricePerNight,
+  maxGuests,
+  checkInDate,
+  setCheckInDate,
+  checkOutDate,
+  setCheckOutDate,
+  guestsCount,
+  setGuestsCount,
+  total,
+  onReserve,
+}) {
   return (
-    <div className="border rounded-xl p-6 shadow sticky top-24">
-      <p className="text-xl font-semibold">
-        ₹{listing.pricePerNight}{" "}
-        <span className="text-sm font-normal">night</span>
+    <div className="bg-white rounded-2xl border shadow-xl p-6">
+      <p className="text-2xl font-semibold mb-4">
+        ₹{pricePerNight}
+        <span className="text-sm text-gray-500"> / night</span>
       </p>
 
-      <div className="grid grid-cols-2 gap-2 mt-4">
-        <input type="date" className="border border-gray-300 px-4 py-2 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition bg-white shadow-sm" />
-        <input type="date" className="border border-gray-300 px-4 py-2 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition bg-white shadow-sm" />
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        <input
+          type="date"
+          value={checkInDate}
+          onChange={(e) => setCheckInDate(e.target.value)}
+          className="input"
+        />
+        <input
+          type="date"
+          value={checkOutDate}
+          onChange={(e) => setCheckOutDate(e.target.value)}
+          className="input"
+        />
       </div>
 
-      <button className="w-full bg-pink-600 text-white py-3 rounded mt-4 font-semibold">
+      <select
+        value={guestsCount}
+        onChange={(e) => setGuestsCount(+e.target.value)}
+        className="input mb-4"
+      >
+        {Array.from({ length: maxGuests }, (_, i) => (
+          <option key={i + 1}>{i + 1} guest</option>
+        ))}
+      </select>
+
+      <div className="space-y-2 text-sm">
+        <div className="flex justify-between">
+          <span>
+            ₹{pricePerNight} × {total.nights} nights
+          </span>
+          <span>₹{pricePerNight * total.nights}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Cleaning fee</span>
+          <span>₹{total.cleaningFee}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Service fee</span>
+          <span>₹{total.serviceFee}</span>
+        </div>
+        <hr />
+        <div className="flex justify-between font-semibold">
+          <span>Total</span>
+          <span>₹{total.totalAmount}</span>
+        </div>
+      </div>
+
+      <button
+        onClick={onReserve}
+        className="w-full mt-4 bg-gradient-to-r from-pink-500 to-red-500 text-white py-3 rounded-xl font-semibold"
+      >
         Reserve
       </button>
 

@@ -34,6 +34,10 @@ import CreateListing from "../provider/pages/CreateListing";
 import EditListing from "../provider/pages/EditListing";
 import HostBookings from "../provider/pages/HostBookings";
 
+//Payments
+import PaymentSuccess from "../pages/PaymentSuccess";
+import PaymentFailed from "../pages/PaymentFailed";
+
 //Post
 import ListingDetails from "../pages/ListingDetails";
 
@@ -57,6 +61,9 @@ const router = createBrowserRouter([
       { path: "auth/forgot-password", element: <ResetOtpRequest /> },
       { path: "auth/forgot-password-otp", element: <ResetPassword /> },
       { path: "post/listings/:id", element: <ListingDetails /> },
+      { path: "/payment/success", element: <PaymentSuccess />},
+      { path: "/payment/failed", element: <PaymentFailed />},
+
 
       // host
       {
