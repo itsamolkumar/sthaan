@@ -1,15 +1,25 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchForm(){
+  
+    const navigate = useNavigate();
     const [inputType,setInputType]=useState("text");
 const {
     register,
     handleSubmit,
   } = useForm();
-  const onSubmit=(data)=>{
-    console.log(data);
-  }
+  const onSubmit = (data) => {
+    const query = new URLSearchParams({
+      place: data.place,
+      checkIn: data.checkIn,
+      checkOut: data.checkOut,
+      guests: data.guest,
+    }).toString();
+
+    navigate(`/search?${query}`);
+  };
     return (
         <div className="mt-6">
                     <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-3xl p-3 shadow-xl grid grid-cols-4 gap-1 items-center w-full   ">

@@ -42,6 +42,7 @@ import BookingDetails from "../pages/BookingDetails";
 
 //Post
 import ListingDetails from "../pages/ListingDetails";
+import SearchResults from "../pages/SearchResults";
 
 
 const router = createBrowserRouter([
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       { path: "/payment/failed", element: <PaymentFailed />},
       {path:"/user/my-bookings", element: <MyBookings/>},
       {path:"/bookings/:id", element:<BookingDetails/>},
+      {path:"search",element:<SearchResults/>},
 
       // host
       {

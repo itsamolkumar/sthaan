@@ -45,3 +45,28 @@ export const getListings = async (req, res, next) => {
   }
 };
 
+export const searchListings = async (req, res, next) => {
+  try {
+    const { place, guests } = req.query;
+
+    const query = {};
+
+    // 📍 Location search (partial match)
+    if (place) {
+      query.location = { $regex: place, $options: "i" };
+    }
+
+    // 👥 Guest capacity
+    if (guests) {
+      query.maxGuests = { $gte: Number(guests) };
+    }
+
+    const listings = await House.find(query)
+      .where("isActive").equals(true)
+      .populate("owner", "firstName profileImage");
+
+    res.json(listings);
+  } catch (err) {
+    next(err);
+  }
+};
