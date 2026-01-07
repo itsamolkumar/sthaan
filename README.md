@@ -129,5 +129,3 @@ The goal of this project is to simulate **real-world booking, payment, and host 
 
 ---
 
-## 📁 Project Structure
-
