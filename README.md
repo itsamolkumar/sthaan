@@ -1,7 +1,7 @@
 # 🏡 Sthaan – Airbnb Inspired Booking Platform (MERN)
 
 <p align="center">
-  <img src="screenshots/banner.png" alt="Sthaan Banner" width="100%" />
+  <img src="screenshots/banner.png" alt="Sthaan Banner" width="10%" />
 </p>
 
 <p align="center">
